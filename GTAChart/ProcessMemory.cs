@@ -9,9 +9,13 @@ namespace GTAChart
 		private IntPtr Handle { get; set; }
 		private Process Process { get; set; }
 
+		public IntPtr BaseAddress => Process.MainModule?.BaseAddress ?? IntPtr.Zero;
+		public IntPtr EndAddress => Process.MainModule?.BaseAddress + Process.MainModule?.ModuleMemorySize ?? IntPtr.Zero;
+
 		public ProcessMemory(int pId, ProcessAccessRights accessRights)
 		{
 			if (pId < 1) throw new ArgumentNullException(nameof(pId));
+			Process = Process.GetProcessById(pId);
 			OpenProcess(pId, accessRights);
 		}
 
