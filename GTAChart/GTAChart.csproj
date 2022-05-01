@@ -70,6 +70,9 @@
         </Compile>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Memory.cs" />
+        <Compile Include="ProcessAccessRights.cs" />
+        <Compile Include="ProcessMemory.cs" />
         <Compile Include="Properties\AssemblyInfo.cs">
             <SubType>Code</SubType>
         </Compile>
