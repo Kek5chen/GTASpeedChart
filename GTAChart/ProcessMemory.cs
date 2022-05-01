@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 
 namespace GTAChart
@@ -16,8 +16,19 @@ namespace GTAChart
 		public ProcessMemory(int pId) : this(pId, ProcessAccessRights.All)
 		{
 		}
+		
+		public ProcessMemory(string processName, ProcessAccessRights accessRights)
+		{
+			Process[] process = Process.GetProcessesByName(processName);
+			if(process.Length == 0)
+				throw new ArgumentException("No process found with name " + processName);
+			OpenProcess(process[0].Id, accessRights);
+		}
+		
+		public ProcessMemory(string processName) : this(processName, ProcessAccessRights.All)
+		{
+		}
 
-		public void OpenProcess(ulong pId, ProcessAccessRights access)
 		public void OpenProcess(int pId, ProcessAccessRights access)
 		{
 			Handle = Memory.OpenProcess(access.Value, false, pId);
