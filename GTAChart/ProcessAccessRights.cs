@@ -2,23 +2,23 @@
 {
 	public class ProcessAccessRights
 	{
-		private const ulong ProcessAllAccess = 0x000F0000L | 0x00100000L | 0xFFFF;
-		private const ulong ProcessCreateProcess = 0x0080;
-		private const ulong ProcessCreateThread = 0x0002;
-		private const ulong ProcessDupHandle = 0x0040;
-		private const ulong ProcessQueryInformation = 0x0400;
-		private const ulong ProcessQueryLimitedInformation = 0x1000;
-		private const ulong ProcessSetInformation = 0x0200;
-		private const ulong ProcessSetQuota = 0x0100;
-		private const ulong ProcessSuspendResume = 0x0800;
-		private const ulong ProcessTerminate = 0x0001;
-		private const ulong ProcessVmOperation = 0x0008;
-		private const ulong ProcessVmRead = 0x0010;
-		private const ulong ProcessVmWrite = 0x0020;
-		private const ulong ProcessSynchronize = 0x00100000L;
+		private const uint ProcessAllAccess = 0x001F0FFF;
+		private const uint ProcessCreateProcess = 0x0080;
+		private const uint ProcessCreateThread = 0x0002;
+		private const uint ProcessDupHandle = 0x0040;
+		private const uint ProcessQueryInformation = 0x0400;
+		private const uint ProcessQueryLimitedInformation = 0x1000;
+		private const uint ProcessSetInformation = 0x0200;
+		private const uint ProcessSetQuota = 0x0100;
+		private const uint ProcessSuspendResume = 0x0800;
+		private const uint ProcessTerminate = 0x0001;
+		private const uint ProcessVmOperation = 0x0008;
+		private const uint ProcessVmRead = 0x0010;
+		private const uint ProcessVmWrite = 0x0020;
+		private const uint ProcessSynchronize = 0x00100000;
 
-		public ulong Value { get; }
-		private ProcessAccessRights(ulong value)
+		public uint Value { get; }
+		private ProcessAccessRights(uint value)
 		{
 			Value = value;
 		}
