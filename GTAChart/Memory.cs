@@ -6,7 +6,7 @@ namespace GTAChart
 	public static class Memory
 	{
 		[DllImport("kernel32.dll")]
-		public static extern IntPtr OpenProcess(ulong dwDesiredAccess, bool bInheritHandle, ulong dwProcessId);
+		public static extern IntPtr OpenProcess(ulong dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 		
 		[DllImport("kernel32.dll")]
 		public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint nSize, out IntPtr lpNumberOfBytesRead);

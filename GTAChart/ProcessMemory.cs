@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 namespace GTAChart
@@ -7,16 +7,18 @@ namespace GTAChart
 	{
 		private IntPtr Handle { get; set; }
 
-		public ProcessMemory(ulong pId, ProcessAccessRights accessRights)
+		public ProcessMemory(int pId, ProcessAccessRights accessRights)
 		{
+			if(pId < 1) throw new ArgumentException("pId must be greater than 0");
 			OpenProcess(pId, accessRights);
 		}
 
-		public ProcessMemory(ulong pId) : this(pId, ProcessAccessRights.All)
+		public ProcessMemory(int pId) : this(pId, ProcessAccessRights.All)
 		{
 		}
 
 		public void OpenProcess(ulong pId, ProcessAccessRights access)
+		public void OpenProcess(int pId, ProcessAccessRights access)
 		{
 			Handle = Memory.OpenProcess(access.Value, false, pId);
 			if (Handle == IntPtr.Zero)
