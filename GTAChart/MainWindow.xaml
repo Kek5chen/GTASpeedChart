@@ -5,19 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GTAChart"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-        mc:Ignorable="d" Height="500" Width="700"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
->
-    <DockPanel>
-        <Label HorizontalContentAlignment="Center" FontSize="30" DockPanel.Dock="Top">GTA Speed Chart</Label>
-        
-        <lvc:CartesianChart Series="{Binding SpeedSeries}" LegendLocation="Right" x:Name="Graph" Zoom="X" Pan="X">
-            <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Time" MinValue="0" />
-            </lvc:CartesianChart.AxisX>
-            <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Speed" MinValue="0"/>
-            </lvc:CartesianChart.AxisY>
-        </lvc:CartesianChart>
-    </DockPanel>
+        mc:Ignorable="d" Height="450" Width="700"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <StackPanel>
+        <DockPanel Height="400">
+            <Label HorizontalContentAlignment="Center" FontSize="30" DockPanel.Dock="Top">GTA Speed Chart</Label>
+
+            <lvc:CartesianChart Series="{Binding SpeedSeries}" LegendLocation="Right" x:Name="Graph" Zoom="X" Pan="X">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Time" MinValue="0" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Speed" MinValue="0" />
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </DockPanel>
+        <Button Height="30" Width="80" Click="StartStop_Click">Start / Stop</Button>
+    </StackPanel>
 </Window>

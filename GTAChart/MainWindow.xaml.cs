@@ -20,14 +20,11 @@ namespace GTAChart
 		public SeriesCollection SpeedSeries { get; set; }
 
 		private readonly ProcessMemory _gtaProcess;
-		
-		public float Speed => _gtaProcess.Read<float>(_gtaProcess.BaseAddress + 0x254A754);
-		
-		public void UpdateSpeedGraph(object o, ElapsedEventArgs args)
-		{
-			SpeedSeries[0].Values.Add(Speed);
-		}
 
+		private float Speed => _gtaProcess.Read<float>(_gtaProcess.BaseAddress + 0x254A754);
+
+		private readonly Timer _timer = new Timer();
+		
 		public MainWindow()
 		{
 			SpeedSeries = new SeriesCollection
@@ -45,17 +42,26 @@ namespace GTAChart
 			try
 			{
 				_gtaProcess = new ProcessMemory("GTA5", ProcessAccessRights.All);
-				Timer timer = new Timer();
-				timer.Interval = 100;
-				timer.AutoReset = true;
-				timer.Elapsed += UpdateSpeedGraph;
-				timer.Start();
+				_timer.Interval = 100;
+				_timer.AutoReset = true;
+				_timer.Elapsed += UpdateSpeedGraph;
+				_timer.Start();
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message);
 				Close();
 			}
+		}
+		
+		public void UpdateSpeedGraph(object o, ElapsedEventArgs args)
+		{
+			SpeedSeries[0].Values.Add(Speed);
+		}
+
+		private void StartStop_Click(object sender, RoutedEventArgs e)
+		{
+			_timer.Enabled = !_timer.Enabled;
 		}
 	}
 }
