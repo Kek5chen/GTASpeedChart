@@ -19,9 +19,7 @@ namespace GTAChart
 	{
 		public SeriesCollection SpeedSeries { get; set; }
 
-		private readonly ProcessMemory _gtaProcess;
-
-		private float Speed => _gtaProcess.Read<float>(_gtaProcess.BaseAddress + 0x254A754);
+		private readonly GTAProcess _gtaProcess;
 
 		private readonly Timer _timer = new Timer();
 		
@@ -41,7 +39,7 @@ namespace GTAChart
 
 			try
 			{
-				_gtaProcess = new ProcessMemory("GTA5", ProcessAccessRights.All);
+				_gtaProcess = new GTAProcess();
 				_timer.Interval = 100;
 				_timer.AutoReset = true;
 				_timer.Elapsed += UpdateSpeedGraph;
@@ -53,10 +51,10 @@ namespace GTAChart
 				Close();
 			}
 		}
-		
-		public void UpdateSpeedGraph(object o, ElapsedEventArgs args)
+
+		private void UpdateSpeedGraph(object o, ElapsedEventArgs args)
 		{
-			SpeedSeries[0].Values.Add(Speed);
+			SpeedSeries[0].Values.Add(_gtaProcess.CurrentSpeed);
 		}
 
 		private void StartStop_Click(object sender, RoutedEventArgs e)
